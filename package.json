@@ -1,0 +1,25 @@
+{
+  "name": "edmonton-property-search",
+  "version": "1.0.0",
+  "description": "Edmonton Property Search",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eugenesang/edmonton-property-search.git"
+  },
+  "author": "Eugene Sang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eugenesang/edmonton-property-search/issues"
+  },
+  "homepage": "https://github.com/eugenesang/edmonton-property-search#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3"
+  }
+}
