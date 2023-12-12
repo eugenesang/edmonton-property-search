@@ -12,7 +12,7 @@ const port = 4880;
 
 app.use(express.json());
 
-mongoose.connect(uri,{useNewUrlParser:true, useUnifiedTopology:true})
+mongoose.connect(uri,{useNewUrlParser:true, useUnifiedTopology:true, maxPoolSize: 10})
 .then(data=>{
     app.listen(port, ()=>{console.log("app listening on port %d", port)});
     uploadProperties();

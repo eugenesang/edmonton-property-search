@@ -24,7 +24,8 @@ const propertySchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        index: true  // Create an index on the 'address' field
+        index: true,
+        unique: true,  // Create an index on the 'address' field
     }
 });
 
