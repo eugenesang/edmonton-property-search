@@ -26,8 +26,16 @@ const propertySchema = new mongoose.Schema({
         type: String,
         index: true,
         unique: true,  // Create an index on the 'address' field
+    },
+    city: {
+        type: String,
+        default: 'Edmonton'
     }
 });
+
+propertySchema.index({
+    address: 'text'
+})
 
 const Property = mongoose.model('Property', propertySchema);
 
