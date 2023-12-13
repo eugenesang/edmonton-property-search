@@ -54,8 +54,10 @@ io.on('connection', (socket) => {
 
             // Perform a case-insensitive search for addresses starting with the user input
             const suggestions = await Property.find({
-                address: { $regex: new RegExp(`^${address}`, 'i') },
-            }).select('address').limit(10);
+                address: { $regex: new RegExp(address, 'i') },
+              })
+              .select('address') // Select only the 'address' field
+              .limit(10);
 
             // Extract the addresses from the result
             const addressSuggestions = suggestions.map((property) => property.address);
