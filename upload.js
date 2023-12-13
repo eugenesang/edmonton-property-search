@@ -1,6 +1,3 @@
-// only use this code if you want to upload the properties for the first time.
-
-
 const Property = require('./properties-model.js');
 const fs = require('fs');
 const JSONStream = require('JSONStream');
@@ -13,7 +10,7 @@ async function uploadProperties() {
 
     let batch = [];
     jsonStream.on('data', (property) => {
-        batch.push(property);
+        batch.push({...property, garage: property.garage == 'Y'});
         if (batch.length >= 100) {
             processBatch(batch);
             batch = [];
