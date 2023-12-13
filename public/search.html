@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Search with Recommendations</title>
+</head>
+<body>
+
+<h1>Real-Time Search with Recommendations</h1>
+
+<form id="searchForm">
+    <label for="searchInput">Search Address:</label>
+    <input type="text" id="searchInput" name="searchInput" placeholder="Enter address">
+    <button type="submit">Search</button>
+</form>
+
+<ul id="suggestionsList"></ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js" integrity="sha512-zoJXRvW2gC8Z0Xo3lBbao5+AS3g6YWr5ztKqaicua11xHo+AvE1b0lT9ODgrHTmNUxeCw0Ry4BGRYZfXu70weg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    const socket = io();
+
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('searchInput');
+    const suggestionsList = document.getElementById('suggestionsList');
+
+    searchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const address = searchInput.value.trim();
+
+        // Emit a 'search' event to the server
+        socket.emit('search', { address });
+    });
+
+    searchInput.addEventListener('keyup', ()=>{
+        const address = searchInput.value.trim();
+        console.log(address);
+        socket.emit('search', {address})
+    })
+
+    // Listen for 'suggestions' events from the server
+    socket.on('suggestions', (suggestions) => {
+        // Update the UI with the received suggestions
+        displaySuggestions(suggestions);
+    });
+
+    // Helper function to display suggestions in the UI
+    function displaySuggestions(suggestions) {
+        suggestionsList.innerHTML = '';
+
+        if (suggestions.length === 0) {
+            suggestionsList.innerHTML = '<li>No suggestions found</li>';
+        } else {
+            suggestions.forEach((suggestion) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = suggestion;
+                suggestionsList.appendChild(listItem);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
