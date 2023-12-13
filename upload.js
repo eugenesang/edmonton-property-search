@@ -1,3 +1,6 @@
+// only use this code if you want to upload the properties for the first time.
+
+
 const Property = require('./properties-model.js');
 const fs = require('fs');
 const JSONStream = require('JSONStream');
